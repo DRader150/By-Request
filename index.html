@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>By Request: A CBDC Scenario</title>
+<meta name="description" content="A dated record of a speculative scenario: a US CBDC arriving by public request after an AI-driven banking crisis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0C1118;
+  --panel:#131A24;
+  --rule:#26313F;
+  --paper:#E8E6E1;
+  --dim:#8B97A6;
+  --amber:#E0A458;
+  --signal:#5DD39E;
+  --signal-dim:#1C3A31;
+  --gold:#D4AF37;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:'Newsreader',Georgia,serif;
+  font-size:18px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 120px}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:var(--ink);
+  border-bottom:1px solid var(--rule);
+  padding:0;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+nav ul{
+  display:inline-flex;
+  gap:0;
+  list-style:none;
+  margin:0;
+  padding:0 16px;
+}
+nav ul li a{
+  display:inline-block;
+  padding:13px 14px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--dim);
+  text-decoration:none;
+  transition:color .15s;
+}
+nav ul li a:hover{color:var(--amber)}
+
+/* ---------- masthead ---------- */
+header{
+  border-bottom:1px solid var(--rule);
+  padding:64px 0 40px;
+  margin-bottom:8px;
+}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:22px;
+}
+h1{
+  font-size:clamp(34px,7vw,54px);
+  line-height:1.08;
+  font-weight:600;
+  margin:0 0 18px;
+  letter-spacing:-.02em;
+}
+.sub{color:var(--dim);font-size:19px;margin:0;max-width:48ch}
+
+/* ---------- master controls ---------- */
+.controls{
+  position:sticky;
+  top:43px;
+  z-index:20;
+  background:linear-gradient(var(--ink) 78%,transparent);
+  padding:16px 0 20px;
+  margin-bottom:20px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:2px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.06em;
+  color:var(--dim);
+  transition:border-color .18s,color .18s;
+}
+.toggle:hover{border-color:var(--signal);color:var(--paper)}
+.toggle:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.lamp{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--rule);
+  transition:background .18s,box-shadow .18s;
+  flex:none;
+}
+body.strategy-on .lamp.s-lamp{background:var(--signal);box-shadow:0 0 10px var(--signal)}
+body.strategy-on .toggle.s-toggle{color:var(--paper);border-color:var(--signal-dim)}
+body.deep-on .lamp.d-lamp{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+body.deep-on .toggle.d-toggle{color:var(--paper);border-color:rgba(224,164,88,.35)}
+
+/* ---------- structure ---------- */
+section{padding:40px 0;border-top:1px solid var(--rule);scroll-margin-top:110px}
+.part{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:10px;
+}
+h2{font-size:30px;line-height:1.2;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+h3{
+  font-size:15px;
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:500;
+  letter-spacing:.04em;
+  color:var(--paper);
+  margin:34px 0 10px;
+}
+.deck{color:var(--dim);font-style:italic;margin:0 0 26px}
+p{margin:0 0 18px}
+strong{font-weight:600}
+ul{padding-left:20px;margin:0 0 18px}
+li{margin-bottom:7px}
+
+blockquote{
+  margin:26px 0;
+  padding:2px 0 2px 20px;
+  border-left:2px solid var(--amber);
+  color:var(--paper);
+}
+blockquote p{margin:0}
+
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--dim);
+  font-weight:500;
+}
+
+/* ---------- strategy inserts ---------- */
+.strategy{
+  display:none;
+  border:1px solid var(--signal-dim);
+  border-left:3px solid var(--signal);
+  background:rgba(93,211,158,.05);
+  padding:20px 22px;
+  margin:30px 0 10px;
+  border-radius:2px;
+}
+body.strategy-on .strategy{display:block;animation:rise .3s ease}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.strategy .tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--signal);
+  display:block;
+  margin-bottom:10px;
+}
+.strategy p{font-size:16.5px;margin-bottom:12px}
+.strategy p:last-child{margin-bottom:0}
+.strategy em{color:var(--signal);font-style:normal;font-weight:600}
+
+/* ---------- deep-dive blocks ---------- */
+.deep{
+  display:none;
+  border:1px solid rgba(224,164,88,.25);
+  border-left:3px solid var(--amber);
+  background:rgba(224,164,88,.04);
+  padding:20px 22px;
+  margin:20px 0 10px;
+  border-radius:2px;
+}
+body.deep-on .deep{display:block;animation:rise .3s ease}
+.deep .tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--amber);
+  display:block;
+  margin-bottom:10px;
+}
+.deep p{font-size:16.5px;margin-bottom:12px}
+.deep p:last-child{margin-bottom:0}
+.deep em{color:var(--amber);font-style:normal;font-weight:600}
+
+/* ---------- inline expanders ---------- */
+details{margin:18px 0}
+details summary{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.06em;
+  color:var(--dim);
+  cursor:pointer;
+  list-style:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border:1px solid var(--rule);
+  border-radius:2px;
+  transition:color .15s,border-color .15s;
+}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:'▶';font-size:8px;transition:transform .2s}
+details[open] summary::before{transform:rotate(90deg)}
+details summary:hover{color:var(--paper);border-color:var(--signal)}
+details .detail-body{
+  padding:16px 18px;
+  margin-top:8px;
+  border:1px solid var(--rule);
+  border-radius:2px;
+  font-size:16.5px;
+  line-height:1.65;
+}
+
+/* ---------- callout / slogan ---------- */
+.callout{
+  margin:32px 0;
+  padding:20px 24px;
+  border:1px solid var(--amber);
+  border-left:4px solid var(--amber);
+  background:rgba(224,164,88,.06);
+  border-radius:2px;
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--paper);
+}
+
+/* ---------- AI companion note ---------- */
+.ai-companion{
+  margin:28px 0;
+  padding:16px 20px;
+  border:1px solid var(--signal-dim);
+  background:rgba(93,211,158,.04);
+  border-radius:2px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  line-height:1.65;
+  color:var(--dim);
+}
+.ai-companion strong{color:var(--signal);font-weight:600}
+
+/* ---------- resource box ---------- */
+.resource-box{
+  display:none;
+  border:1px solid var(--signal-dim);
+  border-left:3px solid var(--signal);
+  background:rgba(93,211,158,.05);
+  padding:18px 20px;
+  margin:16px 0;
+  border-radius:2px;
+}
+body.strategy-on .resource-box{display:block;animation:rise .3s ease}
+.resource-box .tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--signal);
+  display:block;
+  margin-bottom:10px;
+}
+.resource-box p{font-size:15.5px;margin-bottom:10px}
+.resource-box p:last-child{margin-bottom:0}
+.resource-box a{color:var(--signal)}
+
+/* ---------- glossary terms ---------- */
+.glossary-term{
+  margin-bottom:28px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--rule);
+}
+.glossary-term:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.g-word{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.04em;
+  color:var(--amber);
+  margin-bottom:6px;
+}
+.g-def{margin-bottom:10px}
+
+/* ---------- note ---------- */
+.note{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  line-height:1.6;
+  color:var(--dim);
+  border:1px dashed var(--rule);
+  padding:14px 16px;
+  margin:24px 0;
+}
+
+/* ---------- timeline ---------- */
+.timeline{margin:22px 0}
+.tl-row{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:12px 20px;
+  padding:12px 0;
+  border-bottom:1px solid var(--rule);
+  font-size:15.5px;
+}
+.tl-row:last-child{border-bottom:none}
+.tl-era{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  color:var(--amber);
+  padding-top:3px;
+}
+.tl-country{font-weight:600;margin-bottom:3px}
+
+/* ---------- updates ---------- */
+.update-entry{
+  border-left:2px solid var(--rule);
+  padding:10px 0 10px 18px;
+  margin-bottom:18px;
+}
+.update-date{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:var(--amber);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.update-entry p{margin:0;font-size:16px}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--rule);
+  margin-top:40px;
+  padding-top:28px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--dim);
+  line-height:1.7;
+}
+.live-link-box{
+  margin-bottom:20px;
+  padding:14px 16px;
+  border:1px solid var(--signal-dim);
+  background:rgba(93,211,158,.04);
+  border-radius:2px;
+}
+.live-link-box strong{color:var(--signal)}
+.live-link-box a{color:var(--paper);word-break:break-all}
+.live-link-box span{color:var(--dim);font-size:11px;display:block;margin-top:4px}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:600px){body{font-size:17px}.wrap{padding:0 18px 80px}h2{font-size:25px}.controls{gap:8px}.tl-row{grid-template-columns:1fr;gap:4px}}
+
+:root{--rust:#D9714E;--rust-dim:#4A2A20}
+a{color:inherit}
+.lbl{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-right:6px;vertical-align:2px;font-weight:600}
+.lbl.fact{color:var(--signal);border:1px solid var(--signal-dim);background:rgba(93,211,158,.06)}
+.lbl.thesis{color:var(--amber);border:1px solid rgba(224,164,88,.35);background:rgba(224,164,88,.06)}
+.lbl.thesis.rust{color:var(--rust);border-color:var(--rust-dim);background:rgba(217,113,78,.07)}
+.part.rust{color:var(--rust)}
+.signal,.step{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.signal:last-child,.step:last-child{border-bottom:none}
+.sig-num,.step-num{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--amber);padding-top:4px}
+.step-num{color:var(--rust)}
+.sig-title,.step-title{font-weight:600;font-size:19px;margin-bottom:8px}
+.signal p,.step p{font-size:16.5px;margin-bottom:10px}
+.sig-watch{font-family:'IBM Plex Mono',monospace;font-size:12px!important;color:var(--dim)}
+.record-box{border:1px solid var(--rust-dim);border-left:3px solid var(--rust);background:rgba(217,113,78,.05);padding:20px 22px;margin:8px 0 22px;border-radius:2px}
+.record-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);margin-bottom:10px}
+.record-box p{font-size:16.5px;margin-bottom:12px}
+.record-sig{font-style:italic;color:var(--dim);margin-bottom:0!important}
+@media(max-width:600px){.signal,.step{grid-template-columns:32px 1fr;gap:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header id="intro" style="border-bottom-color:var(--rust-dim)">
+  <div class="eyebrow" style="color:var(--rust)">Scenario on record &nbsp;·&nbsp; First published October 14, 2026</div>
+  <h1>By Request</h1>
+  <p class="sub">A scenario in which a US central bank digital currency arrives not because it's imposed, but because frightened citizens ask for it.</p>
+</header>
+
+<section id="record" style="border-top:none">
+  <div class="record-box">
+    <div class="record-tag">Statement of record</div>
+    <p>This page records a scenario I've heard argued and consider possible. It isn't my original idea, and it isn't a claim that this will happen. I'm publishing it with a date so there's a public record of what I believed and when.</p>
+    <p>If it plays out, this page shows it was foreseeable. If it doesn't, this page shows what I got wrong. Either way, the record stays as written. Later changes will be added as dated updates at the bottom, never edits to the original text.</p>
+    <p class="record-sig">— D-Rad, October 14, 2026</p>
+  </div>
+  <p><span class="lbl fact">Fact</span> marks things verifiable today. <span class="lbl thesis rust">Scenario</span> marks projection.</p>
+</section>
+
+<section id="what">
+  <div class="part rust">The short version</div>
+  <h2>Five steps</h2>
+
+  <div class="step"><div class="step-num">1</div><div>
+    <div class="step-title">The planners' frustration</div>
+    <p><span class="lbl fact">Fact</span> Central banks inject money hoping it gets spent, but much of it gets saved, used to pay down debt, or parked in assets. Their tools for forcing money to circulate are blunt: near-zero or negative interest rates, targeted lending programs, and simply creating more money than the math calls for. Japan has tried this for decades with limited success.</p>
+    <p><span class="lbl thesis rust">Scenario</span> Programmable digital money is the tool a central planner would design if starting from scratch. It could carry an expiration date, be limited to certain kinds of spending, or have a negative rate applied directly to every balance. It would remove the leak instead of trying to outrun it.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div>
+    <div class="step-title">The wall: Americans don't want it</div>
+    <p><span class="lbl fact">Fact</span> In January 2025, a presidential executive order barred federal agencies from establishing or promoting a CBDC. The House passed the Anti-CBDC Surveillance State Act on July 17, 2025, by a 219–210 vote. As of early 2026, the Senate version had not passed. The Federal Reserve has repeatedly said it would not issue a CBDC without authorization from Congress.</p>
+    <p><span class="lbl thesis rust">Scenario</span> Forcing a CBDC on the public fails politically. The only way through is for the public to demand it.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div>
+    <div class="step-title">The crisis: an AI-driven banking failure</div>
+    <p><span class="lbl fact">Fact</span> Bank runs now move at internet speed. In March 2023, depositors tried to pull about $42 billion from Silicon Valley Bank in a single day, coordinated largely through phones and social media, and the bank failed the next morning. AI is already used for voice-cloning fraud, deepfake identity theft, and automated cyberattacks.</p>
+    <p><span class="lbl thesis rust">Scenario</span> A banking crisis hits that's driven by AI, or blamed on it: mass account takeovers, AI-coordinated runs, attacks that drain accounts faster than any bank can respond. Whether the crisis is deliberately engineered or simply exploited once it happens, the result is the same. Ordinary people lose faith that private banks can keep their money safe.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">4</div><div>
+    <div class="step-title">The request</div>
+    <p><span class="lbl thesis rust">Scenario</span> Frightened citizens and their representatives call for a safe, government-backed digital dollar: identity-verified, fraud-proof, reversible, and guaranteed by the government itself. The CBDC arrives as consumer protection, and the same laws that blocked it get repealed or worked around with public approval.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">5</div><div>
+    <div class="step-title">The price</div>
+    <p><span class="lbl thesis rust">Scenario</span> Every feature that made it "safe" is also a control. Identity verification means every transaction is visible. Reversibility means any payment can be frozen. Programmability means money can be set to expire, restricted to approved purchases, or charged a negative rate directly. The tool the planners couldn't impose, the public asked for.</p>
+  </div></div>
+</section>
+
+<section id="groundwork">
+  <div class="part rust">Groundwork</div>
+  <h2>Pieces already in place</h2>
+  <p>None of these proves the scenario. They're the real, current developments it would build on.</p>
+  <ul>
+    <li><span class="lbl fact">Fact</span> The GENIUS Act (July 2025) bans payment stablecoin issuers from paying holders interest. Bank-issued deposit tokens and tokenized Treasuries can still pay yield, which puts the yield-paying digital dollars on bank-controlled rails.</li>
+    <li><span class="lbl fact">Fact</span> The Treasury has shifted its borrowing toward short-term bills, the part of the debt market most tightly tied to Fed policy.</li>
+    <li><span class="lbl fact">Fact</span> Other countries already run CBDCs or large pilots. China's digital yuan (e-CNY) is the largest.</li>
+    <li><span class="lbl thesis rust">Scenario</span> Read together, these steer digital dollars toward rails the government and banks control. That makes a final step to a CBDC smaller than it looks today.</li>
+  </ul>
+</section>
+
+<section id="wrong">
+  <div class="part rust">Why this could be wrong</div>
+  <h2>The best case against it</h2>
+  <ul>
+    <li><strong>Opposition crosses party lines.</strong> Distrust of government financial surveillance comes from both the left and the right, and repealing a CBDC ban would be a hard vote even in a crisis.</li>
+    <li><strong>Banks don't want it either.</strong> A government digital dollar would let people hold money directly with the central bank, pulling deposits away from commercial banks. Banks have every reason to fight it and push their own deposit tokens instead.</li>
+    <li><strong>A crisis could push the other way.</strong> A collapse in trust in banks could send people toward self-custody — Bitcoin, gold, cash — instead of toward more central control.</li>
+    <li><strong>"Engineered" is the weakest link.</strong> A crisis that's exploited after the fact is plausible. One that's deliberately planned requires coordination that's hard to keep secret. The scenario still works without the engineering, but that part is a belief, not evidence.</li>
+  </ul>
+</section>
+
+<section id="watch">
+  <div class="part rust">What would confirm it</div>
+  <h2>Signs this is unfolding</h2>
+  <ul>
+    <li>A major banking incident publicly blamed on AI: account takeovers, an AI-coordinated run, or a large-scale automated attack.</li>
+    <li>Polling or prominent public calls for a "government-backed" or "safe" digital dollar after such an incident.</li>
+    <li>The January 2025 executive order reversed, or the anti-CBDC bill quietly dropped.</li>
+    <li>The Fed resuming CBDC research or announcing a pilot.</li>
+    <li>CBDC-style legislation framed as consumer protection or fraud prevention rather than as monetary policy.</li>
+    <li>Identity-linked digital wallets becoming required for government payments such as tax refunds or benefits.</li>
+  </ul>
+</section>
+
+<section id="log">
+  <div class="part rust">Dated updates</div>
+  <h2>Record log</h2>
+  <div class="update-entry" style="border-left-color:var(--rust-dim)">
+    <div class="update-date" style="color:var(--rust)">October 14, 2026</div>
+    <p>Original scenario published. Text above is the original record.</p>
+  </div>
+</section>
+
+<footer>
+  This page is a personal record of a speculative scenario, not a factual claim or financial advice.<br>
+  Legislative status as of early 2026; verify current status at congress.gov.<br><br>
+  <span style="color:var(--rust);">Recorded October 14, 2026</span>
+</footer>
+
+</div>
+
+</body>
+</html>
